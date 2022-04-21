@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&display=swap');
+
+
+.modal-container{
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.modal-content{
+    background-color: lightgray;
+    width: 300px;
+    height: 250px;
+    margin: 0 auto;
+    font-family: 'Cinzel', serif;
+
+}
+.modal-closeButton{
+
+}
+.modal-title{
+    text-align: center;
+}
+.modal-form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 5%;
+}
+.modal-form_inputArea{
+
+}
+.modal-input{
+    height: 20px;
+    width: 90%;
+    text-indent: 5px;
+    font-size: 1rem;
+}
+
+.modal-input:focus, .modal-textArea:focus{
+    outline: none;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+  }
+.modal-input::placeholder,
+.modal-textArea::placeholder{
+    color: #282828;
+    opacity: 0.8;
+    font-family: Georgia;
+    font-size: 1rem;
+}
+
+.modal-textArea{
+    height: 50px;
+    margin: 2% 0;
+    width: 90%;
+    text-indent: 5px;
+    font-size: 1rem;
+}
+
+.modal-button{
+    width: 20%;
+    font-family: 'Cinzel', serif;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.hidden{
+    display: none;
+}
