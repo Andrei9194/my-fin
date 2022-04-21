@@ -1,5 +1,12 @@
+import { Route, Routes } from "react-router-dom"
+import { Modals } from "../modals"
+
 export const Content = () =>{
     return(
-        <h1>Content</h1>
+        <div>
+            <Routes>
+                <Route exact path="/" element={<Modals/>} />
+            </Routes>
+        </div>
     )
 }
