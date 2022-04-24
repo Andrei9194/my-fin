@@ -69,6 +69,13 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+
+.modal-input_error{
+    border-color: #E51A1A;
+}
+.modal-input_error::placeholder{
+    color: #E51A1A;
+  }
 .hidden{
     display: none;
 }

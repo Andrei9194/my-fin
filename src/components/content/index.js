@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom"
 import { MainPage } from "../mainPage"
-import { Modals } from "../modals"
 
 export const Content = () =>{
     return(
