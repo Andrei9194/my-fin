@@ -1,6 +1,7 @@
 import './index.css'
 import { useState } from "react"
 import { Modals } from '../modals'
+import { AttentionWindow } from '../attentionWindow'
 
 export const MainPage = () =>{
 
@@ -64,7 +65,7 @@ export const MainPage = () =>{
     const reduceCount =  totalCount.reduce((result, points)=>{
       return Number(result) + Number(points)
     }, 0)
-
+    console.log('reducer: ', reduceCount)
     return(
         <div>
             <div>
@@ -78,6 +79,7 @@ export const MainPage = () =>{
             addCost={addNewCost}
             click={click} setClick={setClick}
             formData={formData} setFormData={setFormData} modalName={modalName} addRevenue={addNewRevenue} />
+            <AttentionWindow count={reduceCount} />
         </div>
     )
 }

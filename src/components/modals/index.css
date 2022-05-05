@@ -15,7 +15,7 @@
 
 }
 .modal-closeButton{
-
+    cursor: pointer;
 }
 .modal-title{
     text-align: center;
