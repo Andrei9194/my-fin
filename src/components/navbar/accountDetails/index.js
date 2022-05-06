@@ -1,5 +1,6 @@
 import revenue from '../../../assets/revenue.png'
 import costs from '../../../assets/costs.png'
+import { NavLink } from 'react-router-dom'
 
 export const AccountDetails = () =>{
 
@@ -11,10 +12,10 @@ export const AccountDetails = () =>{
                     <img alt="costs" src={costs} className='nav-details_icon' />
                     <p className='nav-details_text'>costs</p>
                 </div>
-                <div className='nav-details_area'>
-                    <img alt="revenue" src={revenue} className='nav-details_icon' />
-                    <p className='nav-details_text'>revenue</p>
-                </div>
+                <NavLink to='/revenue' className='nav-details_area'>
+                        <img alt="revenue" src={revenue} className='nav-details_icon' />
+                        <p className='nav-details_text'>revenue</p>
+                </NavLink>
             </div>
         </div>
     )
