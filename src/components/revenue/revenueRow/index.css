@@ -1,0 +1,36 @@
+.titleArea{
+    background-color: lightblue;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.title{
+    padding-left: 1%;
+}
+
+.titleButton{
+    padding-right: 1%;
+    cursor: pointer;
+}
+
+.info{
+    width: 70%;
+    margin: 0 auto;
+    background-color: rgb(185, 185, 185);
+    margin-bottom: 2%;
+}
+
+.content{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+}
+
+.table{
+    background-color: rebeccapurple;
+    width: 100%;
+}
+.hidden{
+    display: none;
+}

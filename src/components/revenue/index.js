@@ -18,8 +18,6 @@ export const Revenue = () =>{
        fetchRevenue()
     }, [])
 
-    console.log(revenueDatas)
-
     return(
         <div>
              <h1>Revenue</h1>

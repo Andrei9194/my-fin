@@ -17,6 +17,12 @@ export const MainPage = () =>{
     })
 
     const [overCount, setOverCount] = useState('')
+    const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    const da = new Date()
+    const numberMonth = da.getMonth()+1
+    const currentMonth = monthName[numberMonth]
+    console.log(currentMonth);
+
 
     const handleClose = () =>{
         setFormData({
@@ -27,7 +33,7 @@ export const MainPage = () =>{
     }
 
     const addNewDatas= (data, method) =>{
-        return fetch(`${DATABASE_URL}/${method}.json`,{
+        return fetch(`${DATABASE_URL}/${method}/${currentMonth}.json`,{
             method: "POST",
             body: JSON.stringify(data)
         })
@@ -117,7 +123,6 @@ export const MainPage = () =>{
         // fetchCosts()
     },[])
 
-    console.log(Date.now());
     
 
     const reduceAmount = (rev, cost) =>{
