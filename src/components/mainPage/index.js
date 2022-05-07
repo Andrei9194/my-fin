@@ -6,30 +6,41 @@ import { DATABASE_URL } from '../../firebase-config'
 
 export const MainPage = () =>{
 
-    const [datas, setDatas] = useState([]) 
-    const [revenueData, setRevenuesData] = useState()
+    const [revenueData, setRevenuesData] = useState(null)
+    const [costsData, setCostsData] = useState(null)
     const [showModal, setShowModal] = useState(false)
-    const [modalName, setModalName] = useState('')
+    const [modalName, setModalName] = useState()
     const [click, setClick] = useState(true)
     const [formData, setFormData] = useState({
         count: '',
         note: '',
     })
 
+    const [overCount, setOverCount] = useState('')
+
+    const handleClose = () =>{
+        setFormData({
+            count: '',
+            note: '',
+        })
+        setShowModal(false)
+    }
+
+    const addNewDatas= (data, method) =>{
+        return fetch(`${DATABASE_URL}/${method}.json`,{
+            method: "POST",
+            body: JSON.stringify(data)
+        })
+    }
+
     const addNewRevenue = (e) =>{
         e.preventDefault()
         if(!formData.count.length){
             setClick(false)
         }else{
-            fetch(`${DATABASE_URL}/revenues.json`,{
-                method: "POST",
-                body: JSON.stringify(formData)
-            }).then(()=>{
-                setFormData({
-                    count: '',
-                    note: '',
-                })
-                setShowModal(false)
+            addNewDatas({...formData, count: Number(formData.count)}, 'revenues')
+            .then(()=>{
+                handleClose()
             }).catch(()=>{
                 console.error()
             })
@@ -41,12 +52,12 @@ export const MainPage = () =>{
             setClick(false)
         } else{
             e.preventDefault()
-            setDatas([...datas, {...formData, count: 0 - formData.count ,id: Date.now()}])
-            setFormData({
-                count: '',
-                note: '',
+            addNewDatas({...formData, count: 0 - formData.count}, 'costs')
+            .then(()=>{
+                handleClose()
+            }).catch(()=>{
+                console.error()
             })
-            setShowModal(false)
         }
     }
 
@@ -68,13 +79,6 @@ export const MainPage = () =>{
         })
     }
 
-    const totalCount = datas.map(item => item.count)
-
-    const reduceCount =  totalCount.reduce((result, points)=>{
-      return Number(result) + Number(points)
-    }, 0)
-    console.log('reducer: ', reduceCount)
-
     const fetchRevenue = ()=>{
         fetch(`${DATABASE_URL}/revenues.json`)
         .then(r => r.json())
@@ -82,33 +86,69 @@ export const MainPage = () =>{
             const formattedData = Object.keys(data).map(key => ({id: key, ...data[key]}))
             setRevenuesData(formattedData)
         })
+        .catch(()=>{
+            console.error('error');
+        })
     }
-    const totalAmout = (counts) =>{
-       return counts.map(i => i.count)
+    const fetchCosts = ()=>{
+        // fetchData('costs')
+        fetch(`${DATABASE_URL}/costs.json`)
+        .then(r => r.json())
+        .then(data =>{
+            const formattedData = Object.keys(data).map(key => ({id: key, ...data[key]}))
+            setCostsData(formattedData)
+        })
+        .catch(()=>{
+            console.error('error')
+        })
     }
-    const totalRevenues = totalAmout(revenueData)
-    // const totalCosts = totalAmout(costsData)
 
-    const reduceAmount = (rev, cost) =>{
-        const total  = rev.concat(cost).reduce((rev, cost)=> Number(rev) + Number(cost), 0)
-        return total
+    const totalAmout = (counts) =>{
+        if(counts){
+            return counts.map(i => i.count)
+        }
     }
-  
+    
+    const totalRevenues = totalAmout(revenueData)
+    const totalCosts = totalAmout(costsData)
 
     useEffect(()=>{
-        fetchRevenue()
+        // fetchRevenue()
+        // fetchCosts()
     },[])
 
-    console.log(revenueData)
-    console.log(totalRevenues);
-    // console.log(reduceRevenue)
+    console.log(Date.now());
+    
+
+    const reduceAmount = (rev, cost) =>{
+        if(rev && cost){
+            const total  = rev.concat(cost).reduce((rev, cost)=> rev + cost, 0)
+           return setOverCount(total)
+        } else if(rev && !cost){
+           const total = rev.reduce((rev, cost)=> rev + cost, 0)
+            return setOverCount(total)
+        } else if(!rev && cost){
+            const total = cost.reduce((cost, rev)=> cost + rev, 0)
+            return setOverCount(total)
+        }
+
+    }
+
+    // const fr = reduceAmount(totalRevenues, totalCosts)
+
+    // console.log('====================================');
+    // console.log(overCount);
+    // console.log(totalRevenues);
+    // console.log(totalCosts);
+    // // console.log(fr);
+    // console.log('====================================');
+
     return(
         <div>
             <div>
                 <button onClick={showCostModal}>-</button>
-              <div className='mainPage-count_area' style={{backgroundColor: (0 <= reduceCount) ? 'rgba(32, 209, 32, 0.55)' : 'rgba(255, 6, 6, 0.55)'}}>
-                  <p>0</p>
-                  {/* <p>{totalCount(totalRevenues, totalCosts)}</p> */}
+              <div className='mainPage-count_area' style={{backgroundColor: (0 <= overCount) ? 'rgba(32, 209, 32, 0.55)' : 'rgba(255, 6, 6, 0.55)'}}>
+                 <p>{overCount}</p>
               </div>
                 <button onClick={showRevenueModal}>+</button>
             </div>
@@ -116,7 +156,7 @@ export const MainPage = () =>{
             addCost={addNewCost}
             click={click} setClick={setClick}
             formData={formData} setFormData={setFormData} modalName={modalName} addRevenue={addNewRevenue} />
-            <AttentionWindow count={reduceCount} />
+            <AttentionWindow count={overCount} />
         </div>
     )
 }

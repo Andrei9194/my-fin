@@ -1,4 +1,3 @@
-import { FirebaseError } from "firebase/app";
 import { useEffect, useState } from "react"
 import { DATABASE_URL } from "../../firebase-config";
 import { RevenueRow } from "./revenueRow";
