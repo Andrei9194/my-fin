@@ -51,7 +51,6 @@ export const Costs = () =>{
                    <td>date</td>
                    <td>type cost</td>
                    <td>cost amount</td>
-                   <td>a percentage of total cost</td>
                    <td  className="lowlight"><div></div></td> 
                </tr>
            </thead>
@@ -65,15 +64,14 @@ export const Costs = () =>{
                        <td className="tableBody_data">{cost.day}</td>
                        <td className="tableBody_data">{cost.note}</td>
                        <td className="tableBody_data">{cost.count} $</td>
-                       <td className="tableBody_data">{share(cost.count, sum)}%</td>
                        <td className="highlight"><div className="highlight_div"></div></td>
                    </tr>   
                        ))}
                                             
            </tbody>
            <tfoot className="tableFooter">
-               <td colSpan="3" >total revenue</td>
-               <td colSpan='3' className="tableFooter_sum">{sum} $</td>
+               <td colSpan="2" >total revenue</td>
+               <td colSpan='2' className="tableFooter_sum">{sum} $</td>
            </tfoot>
        </table>
        </div>

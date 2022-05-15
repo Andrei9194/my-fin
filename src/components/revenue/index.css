@@ -28,7 +28,7 @@
 
 table {
     border-radius:4px;
-    width:100%;
+    width:70%;
     margin:100px auto;
     background-color: #34495E;
     border-collapse: collapse; 
@@ -70,10 +70,10 @@ table {
     background-color: #34495E;
     transition: all 0.2s ease-in-out;
   }
-  .tableBody:hover {
+  .tableBody_field:hover {
    box-shadow: 0px 9px 4px -6px #dd5;
   }
-  .tableBody:hover .tableBody_data{
+  .tableBody_field:hover .tableBody_data{
     cursor:pointer;
     border-top: 1px solid #dd5;
     border-bottom: 1px solid #dd5;
