@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { DATABASE_URL } from "../../firebase-config";
-import { RevenueRow } from "./revenueRow";
+import './index.css'
 
 export const Revenue = () =>{
     const [revenueDatas, setRevenuesDatas] = useState()
@@ -74,7 +74,7 @@ export const Revenue = () =>{
                 </tbody>
                 <tfoot className="tableFooter">
                     <td colSpan="3" >total revenue</td>
-                    <td colSpan='3' className="tableFooter_sum">{sum}</td>
+                    <td colSpan='3' className="tableFooter_sum">{sum} $</td>
                 </tfoot>
             </table>
             </div>
