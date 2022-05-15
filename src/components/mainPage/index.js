@@ -16,13 +16,15 @@ export const MainPage = () =>{
         note: '',
     })
 
+    
     const [overCount, setOverCount] = useState('')
     const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    const da = new Date()
-    const numberMonth = da.getMonth()+1
+    const today = new Date()
+    const numberMonth = today.getMonth()
+    const currentDay = String(today.getDate())
     const currentMonth = monthName[numberMonth]
-    console.log(currentMonth);
-
+    const currentYear = String(today.getFullYear())
+    const currentDate = currentDay + ' ' + currentMonth + ' ' + currentYear; 
 
     const handleClose = () =>{
         setFormData({
@@ -32,8 +34,8 @@ export const MainPage = () =>{
         setShowModal(false)
     }
 
-    const addNewDatas= (data, method) =>{
-        return fetch(`${DATABASE_URL}/${method}/${currentMonth}.json`,{
+    const addNewDatas= (method, data) =>{
+        return fetch(`${DATABASE_URL}/${method}.json`,{
             method: "POST",
             body: JSON.stringify(data)
         })
@@ -44,7 +46,7 @@ export const MainPage = () =>{
         if(!formData.count.length){
             setClick(false)
         }else{
-            addNewDatas({...formData, count: Number(formData.count)}, 'revenues')
+            addNewDatas('revenues', {...formData, count: Number(formData.count), day: currentDate})
             .then(()=>{
                 handleClose()
             }).catch(()=>{
@@ -58,7 +60,7 @@ export const MainPage = () =>{
             setClick(false)
         } else{
             e.preventDefault()
-            addNewDatas({...formData, count: 0 - formData.count}, 'costs')
+            addNewDatas('costs', {...formData, count: -Math.abs(formData.count), day: currentDate})
             .then(()=>{
                 handleClose()
             }).catch(()=>{
@@ -68,8 +70,8 @@ export const MainPage = () =>{
     }
 
     const showCostModal = () =>{
-        setShowModal(true)
         setModalName('cost')
+        setShowModal(true)
         setFormData({
             count: '',
             note: ''
@@ -77,8 +79,8 @@ export const MainPage = () =>{
     }
 
     const showRevenueModal = () =>{
-        setShowModal(true)
         setModalName('revenue')
+        setShowModal(true)
         setFormData({
             count: '',
             note: ''
@@ -138,15 +140,6 @@ export const MainPage = () =>{
         }
 
     }
-
-    // const fr = reduceAmount(totalRevenues, totalCosts)
-
-    // console.log('====================================');
-    // console.log(overCount);
-    // console.log(totalRevenues);
-    // console.log(totalCosts);
-    // // console.log(fr);
-    // console.log('====================================');
 
     return(
         <div>
