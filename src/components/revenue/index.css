@@ -1,0 +1,85 @@
+.titleArea{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.title{
+    padding-left: 1%;
+}
+
+.titleButton{
+    padding-right: 1%;
+    cursor: pointer;
+}
+
+.info{
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 2%;
+}
+
+.content{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+}
+
+
+table {
+    border-radius:4px;
+    width:100%;
+    margin:100px auto;
+    background-color: #34495E;
+    border-collapse: collapse; 
+    font-family: 'Cinzel', serif;
+  }
+
+  .tableHeader{
+      color: #dd5;
+      text-align:center;
+      height: 70px;
+  }
+  .tableBody,
+  .tableFooter{
+      color: aliceblue;
+  }
+
+  .tableFooter{
+      border-top: 2px solid #dd5;
+      height: 50px;
+      text-align: center;
+  }
+  tr {
+    border: 1px solid transparent;
+    z-index:7;
+  }
+  .tableBody_data {
+    text-align:center;
+    padding: 20px;
+    transition: all 0.2s ease-in-out;
+  }
+  .highlight {
+    padding:0;
+    width:4px;
+  }
+  .highlight_div {
+    width:4px;
+    height:60px;
+    border-radius:4px;
+    background-color: #34495E;
+    transition: all 0.2s ease-in-out;
+  }
+  .tableBody:hover {
+   box-shadow: 0px 9px 4px -6px #dd5;
+  }
+  .tableBody:hover .tableBody_data{
+    cursor:pointer;
+    border-top: 1px solid #dd5;
+    border-bottom: 1px solid #dd5;
+  }
+  
+
+  .tableBody_field:hover .highlight .highlight_div {
+    transform: scaleX(3);
+  }
