@@ -5,8 +5,13 @@ export const Costs = () =>{
 
     const [costs, setCosts] = useState()
 
+    const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    const today = new Date()
+    const numberMonth = today.getMonth()
+    const currentMonth = monthName[numberMonth]
+
     const fetchCosts = () =>{
-        fetch(`${DATABASE_URL}/costs.json`)
+        fetch(`${DATABASE_URL}/costs/${currentMonth}.json`)
         .then(r => r.json())
         .then(data =>{
             const formattedData = Object.keys(data).map(key => ({id: key, ...data[key]}))

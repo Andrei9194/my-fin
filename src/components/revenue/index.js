@@ -5,15 +5,22 @@ import './index.css'
 export const Revenue = () =>{
     const [revenueDatas, setRevenuesDatas] = useState()
 
+    const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    const today = new Date()
+    const numberMonth = today.getMonth()
+    const currentMonth = monthName[numberMonth]
+
+
     const fetchRevenue =() =>{
-        fetch(`${DATABASE_URL}/revenues.json`)
+        fetch(`${DATABASE_URL}/revenues/${currentMonth}.json`)
         .then(r=>r.json())
         .then(data => {
-            const formattedData = Object.keys(data).map(key => ({id:key, ...data[key]}))
+            console.log(data);
+            const formattedData = Object.keys(data).map(key => ({id:key.id, ...data[key]}))
             setRevenuesDatas(formattedData)
         })
     }
-
+    
     useEffect(()=>{
        fetchRevenue()
     }, [])
@@ -41,8 +48,8 @@ export const Revenue = () =>{
 
 
     return(
-        <div>
-             <h1>Revenue</h1>
+        <div className="revenueCosts-container">
+             <h1 className="revenueCosts-title">Revenue</h1>
              <div className="info">
             <div className="tableArea">
             <table className='table'>
