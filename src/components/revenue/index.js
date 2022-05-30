@@ -5,15 +5,22 @@ import './index.css'
 export const Revenue = () =>{
     const [revenueDatas, setRevenuesDatas] = useState()
 
+    const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    const today = new Date()
+    const numberMonth = today.getMonth()
+    const currentMonth = monthName[numberMonth]
+
+
     const fetchRevenue =() =>{
-        fetch(`${DATABASE_URL}/revenues.json`)
+        fetch(`${DATABASE_URL}/revenues/${currentMonth}.json`)
         .then(r=>r.json())
         .then(data => {
-            const formattedData = Object.keys(data).map(key => ({id:key, ...data[key]}))
+            console.log(data);
+            const formattedData = Object.keys(data).map(key => ({id:key.id, ...data[key]}))
             setRevenuesDatas(formattedData)
         })
     }
-
+    
     useEffect(()=>{
        fetchRevenue()
     }, [])
@@ -41,8 +48,8 @@ export const Revenue = () =>{
 
 
     return(
-        <div>
-             <h1>Revenue</h1>
+        <div className="revenueCosts-container">
+             <h1 className="revenueCosts-title">Revenue</h1>
              <div className="info">
             <div className="tableArea">
             <table className='table'>
@@ -52,7 +59,6 @@ export const Revenue = () =>{
                         <td>date</td>
                         <td>type revenue</td>
                         <td>revenue amount</td>
-                        <td>a percentage of total revenue</td>
                         <td  className="lowlight"><div></div></td> 
                     </tr>
                 </thead>
@@ -66,15 +72,14 @@ export const Revenue = () =>{
                             <td className="tableBody_data">{revenue.day}</td>
                             <td className="tableBody_data">{revenue.note}</td>
                             <td className="tableBody_data">{revenue.count} $</td>
-                            <td className="tableBody_data">{share(revenue.count, sum)}%</td>
                             <td className="highlight"><div className="highlight_div"></div></td>
                         </tr>   
                             ))}
                                                  
                 </tbody>
                 <tfoot className="tableFooter">
-                    <td colSpan="3" >total revenue</td>
-                    <td colSpan='3' className="tableFooter_sum">{sum} $</td>
+                    <td colSpan="2" >total revenue</td>
+                    <td colSpan='2' className="tableFooter_sum">{sum} $</td>
                 </tfoot>
             </table>
             </div>

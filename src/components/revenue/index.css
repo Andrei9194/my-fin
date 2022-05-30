@@ -1,11 +1,17 @@
+.revenueCosts-container{
+  display: flex;
+  flex-direction: column;
+}
 .titleArea{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+ 
 }
-.title{
-    padding-left: 1%;
+.revenueCosts-title{
+    text-align: center;
+    font-family: 'Cinzel', serif;
 }
 
 .titleButton{
@@ -14,9 +20,9 @@
 }
 
 .info{
-    width: 70%;
-    margin: 0 auto;
-    margin-bottom: 2%;
+    width: 60%;
+    margin-left: 10%;
+    /* margin: 0 auto; */
 }
 
 .content{
@@ -28,8 +34,8 @@
 
 table {
     border-radius:4px;
-    width:100%;
-    margin:100px auto;
+    width:70%;
+    margin-top: 10%;
     background-color: #34495E;
     border-collapse: collapse; 
     font-family: 'Cinzel', serif;
@@ -50,6 +56,12 @@ table {
       height: 50px;
       text-align: center;
   }
+    
+  .tableFooter_sum{
+    text-align: end;
+    padding-right: 1%;
+  }
+
   tr {
     border: 1px solid transparent;
     z-index:7;
@@ -70,10 +82,10 @@ table {
     background-color: #34495E;
     transition: all 0.2s ease-in-out;
   }
-  .tableBody:hover {
+  .tableBody_field:hover {
    box-shadow: 0px 9px 4px -6px #dd5;
   }
-  .tableBody:hover .tableBody_data{
+  .tableBody_field:hover .tableBody_data{
     cursor:pointer;
     border-top: 1px solid #dd5;
     border-bottom: 1px solid #dd5;

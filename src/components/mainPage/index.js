@@ -24,7 +24,7 @@ export const MainPage = () =>{
     const currentDay = String(today.getDate())
     const currentMonth = monthName[numberMonth]
     const currentYear = String(today.getFullYear())
-    const currentDate = currentDay + ' ' + currentMonth + ' ' + currentYear; 
+    const currentDate = currentDay + ' ' + currentMonth; 
 
     const handleClose = () =>{
         setFormData({
@@ -34,8 +34,8 @@ export const MainPage = () =>{
         setShowModal(false)
     }
 
-    const addNewDatas= (method, data) =>{
-        return fetch(`${DATABASE_URL}/${method}.json`,{
+    const addNewDatas= (method, month, data) =>{
+        return fetch(`${DATABASE_URL}/${method}/${month}.json`,{
             method: "POST",
             body: JSON.stringify(data)
         })
@@ -46,7 +46,7 @@ export const MainPage = () =>{
         if(!formData.count.length){
             setClick(false)
         }else{
-            addNewDatas('revenues', {...formData, count: Number(formData.count), day: currentDate})
+            addNewDatas('revenues', currentMonth, {...formData, count: Number(formData.count), day: currentDate})
             .then(()=>{
                 handleClose()
             }).catch(()=>{
@@ -60,7 +60,7 @@ export const MainPage = () =>{
             setClick(false)
         } else{
             e.preventDefault()
-            addNewDatas('costs', {...formData, count: -Math.abs(formData.count), day: currentDate})
+            addNewDatas('costs', currentMonth, {...formData, count: -Math.abs(formData.count), day: currentDate})
             .then(()=>{
                 handleClose()
             }).catch(()=>{
